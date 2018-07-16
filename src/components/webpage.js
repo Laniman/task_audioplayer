@@ -1,8 +1,12 @@
 import React from 'react';
+import TrackList from '../containers/track-list';
+import Display from '../containers/display';
 
 const WebPage = () => (
 	<div>
-		<h3>Tracks:</h3>
+		<h2>Tracks:</h2>
+		<TrackList />
+		<Display />
 	</div>
 );
 

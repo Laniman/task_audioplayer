@@ -10,7 +10,9 @@ const store = createStore(allReducers);
 class App extends Component {
   render() {
     return (
-      <WebPage />
+    	<Provider store={store}>
+    		<WebPage />
+    	</Provider>
     );
   }
 }
