@@ -7,9 +7,10 @@ class TrackList extends Component {
 	showList() {
 		return this.props.tracks.map ((item) => {
 			return (
-					<li key={item.id} onClick={() => this.props.play(item)}>
-					<div className="track-info">{item.artist} - {item.name}</div><div className="duration">1:00</div>
-					</li>
+				<li key={item.id} onClick={() => this.props.play(item)}>
+				<div className="track-info">{item.artist} - {item.name}</div><div className="duration">1:00</div>
+				<audio src={item.source}></audio>
+				</li>
 			);
 		});
 	}

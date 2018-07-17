@@ -78,8 +78,8 @@
 
 .previous {
   box-shadow: 0px 0px 20px 2px black;
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   position: absolute;
   top: 10px;
   left: 20px;
@@ -89,7 +89,7 @@
   content: ''; 
   position: absolute;
   right: 12px; 
-  top: 3px;
+  top: 4px;
   border: 9px solid transparent;
   border-right: 9px solid white; 
 }
@@ -98,15 +98,15 @@
   content: ''; 
   position: absolute;
   right: 7px; 
-  top: 3px;
+  top: 4px;
   border: 9px solid transparent;
   border-right: 9px solid white; 
 }
 
 .play {
   box-shadow: 0px 0px 20px 2px black;
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   position: absolute;
   top: 10px;
   left: 60px;
@@ -115,16 +115,45 @@
 .play::before {
   content: ''; 
   position: absolute;
-  right: -2px; 
-  top: 3px;
+  right: -1px; 
+  top: 4px;
   border: 9px solid transparent;
   border-left: 9px solid white; 
 }
 
+.pause {
+  box-shadow: 0px 0px 20px 2px black;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 10px;
+  left: 60px;
+}
+
+.pause::before {
+  content: ''; 
+  position: absolute;
+  right: 6px; 
+  top: 5px;
+  width: 5px;
+  height: 16px;
+  background-color: white;
+}
+
+.pause::after {
+  content: ''; 
+  position: absolute;
+  right: 15px; 
+  top: 5px;
+  width: 5px;
+  height: 16px;
+  background-color: white;
+}
+
 .next {
   box-shadow: 0px 0px 20px 2px black;
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   position: absolute;
   top: 10px;
   left: 100px;
@@ -134,7 +163,7 @@
   content: ''; 
   position: absolute;
   right: 1px; 
-  top: 3px;
+  top: 4px;
   border: 9px solid transparent;
   border-left: 9px solid white; 
 }
@@ -143,14 +172,15 @@
   content: ''; 
   position: absolute;
   right: -4px; 
-  top: 3px;
+  top: 4px;
   border: 9px solid transparent;
   border-left: 9px solid white; 
 }
 
 .previous:hover,
 .play:hover,
-.next:hover {
+.next:hover,
+.pause:hover {
   cursor: pointer;
 }
 
@@ -166,6 +196,12 @@
 .next:hover:after {
   transition-duration: 0.2s;
   border-left-color: #D3D3D3;
+}
+
+.pause:hover:before,
+.pause:hover:after {
+  transition-duration: 0.2s;
+  background-color: #D3D3D3;
 }
 
 .volumeBar {
@@ -230,7 +266,7 @@
   position: absolute;
   top: 52px;
   left: 5px;
-  width: 390px;
+  width: 360px;
   height: 15px;
 }
 
@@ -271,4 +307,16 @@
   box-shadow: 0px 0px 5px 2px black;
   z-index: 1;
   border-radius: 0;
+}
+
+.elapsedTime {
+  color: white;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 12px;
+}
+
+.elapsedTime:hover {
+  cursor: default;
 }

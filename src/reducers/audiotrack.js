@@ -29,18 +29,6 @@ export default function () {
 			artist: "jimdubtrix",
 			name: "Flying Higher(Shankar Mix)",
 			source: "http://sampleswap.org/mp3/artist/29716/BeatNabob_Flying-HigherShankar-Mix-160.mp3"
-		},
-		{
-			id: 5,
-			artist: "jimdubtrix",
-			name: "Flying Higher(Shankar Mix)",
-			source: "http://sampleswap.org/mp3/artist/29716/BeatNabob_Flying-HigherShankar-Mix-160.mp3"
-		},
-		{
-			id: 5,
-			artist: "jimdubtrix",
-			name: "Flying Higher(Shankar Mix)",
-			source: "http://sampleswap.org/mp3/artist/29716/BeatNabob_Flying-HigherShankar-Mix-160.mp3"
 		}
 	]
 }
