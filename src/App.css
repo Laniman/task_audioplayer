@@ -1,28 +1,274 @@
-.App {
-  text-align: center;
+.player {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
+.tracklist {
+  background-color: #F5F5F5;
+  color: black;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 10px;
+  width: 400px;
+  height: 200px;
+  border: 1px solid #DCDCDC;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.searchField {
+  width: 100%;
+  font-style: italic;
+}
+
+.searchField:focus {
+  font-style: normal;
+}
+
+.tracklist ol {
+  margin: 0;
+  padding: 10px 0 10px 20px;
+  height: 165px;
+  overflow-y: scroll;
+}
+
+.tracklist li {
+  height: 25px;
+  width: 360px;
+  position: relative;
+  border: none;
+  border-radius: 4px;
+  padding-top: 5px;
+  padding-left: 2px;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+}
+
+.tracklist li:hover {
+  background-color: #ADD8E6;
+  cursor: default;
+}
+
+.tracklist li .track-info {
+  max-width: 315px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tracklist li .duration {
+  margin-left: 3px;
+  width: 42px;
+  text-align: right;
+  position: absolute;
+  top: 5px;
+  right: 0;
+  padding-right: 3px;
+}
+
+.display {
   height: 80px;
+  background: linear-gradient(to bottom, #A9A9A9, #2F4F4F);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: relative;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.previous {
+  box-shadow: 0px 0px 20px 2px black;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 10px;
+  left: 20px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.previous::before {
+  content: ''; 
+  position: absolute;
+  right: 12px; 
+  top: 3px;
+  border: 9px solid transparent;
+  border-right: 9px solid white; 
 }
 
-.App-intro {
-  font-size: large;
+.previous::after {
+  content: ''; 
+  position: absolute;
+  right: 7px; 
+  top: 3px;
+  border: 9px solid transparent;
+  border-right: 9px solid white; 
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.play {
+  box-shadow: 0px 0px 20px 2px black;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 10px;
+  left: 60px;
+}
+
+.play::before {
+  content: ''; 
+  position: absolute;
+  right: -2px; 
+  top: 3px;
+  border: 9px solid transparent;
+  border-left: 9px solid white; 
+}
+
+.next {
+  box-shadow: 0px 0px 20px 2px black;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 10px;
+  left: 100px;
+}
+
+.next::before {
+  content: ''; 
+  position: absolute;
+  right: 1px; 
+  top: 3px;
+  border: 9px solid transparent;
+  border-left: 9px solid white; 
+}
+
+.next::after {
+  content: ''; 
+  position: absolute;
+  right: -4px; 
+  top: 3px;
+  border: 9px solid transparent;
+  border-left: 9px solid white; 
+}
+
+.previous:hover,
+.play:hover,
+.next:hover {
+  cursor: pointer;
+}
+
+.previous:hover:before,
+.previous:hover:after {
+  transition-duration: 0.2s;
+  border-right-color: #D3D3D3;
+}
+
+.play:hover:before,
+.play:hover:after,
+.next:hover:before,
+.next:hover:after {
+  transition-duration: 0.2s;
+  border-left-color: #D3D3D3;
+}
+
+.volumeBar {
+  -webkit-appearance: none;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius: 5px;
+  background: rgb(55,55,55);
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 150px;
+  height: 7px;
+}
+
+.volumeBar:hover {
+  opacity: 1;
+}
+
+.volumeBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #A9A9A9, #2F4F4F);
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 2px black;
+  z-index: 1;
+}
+
+.volumeBar::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #A9A9A9, #2F4F4F);
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 2px black;
+  z-index: 1;
+}
+
+.volumeBar::-ms-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #A9A9A9, #2F4F4F);
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 2px black;
+  z-index: 1;
+}
+
+.progressBar {
+  -webkit-appearance: none;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius: 10px;
+  background: rgb(55,55,55);
+  position: absolute;
+  top: 52px;
+  left: 5px;
+  width: 390px;
+  height: 15px;
+}
+
+.progressBar:hover {
+  opacity: 1;
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  -webkit-transform: rotate(-45deg);
+  background: linear-gradient(to left bottom, #A9A9A9, #2F4F4F);
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 2px black;
+  z-index: 1;
+  border-radius: 0;
+}
+
+.progressBar::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  -moz-transform: rotate(-45deg);
+  background: linear-gradient(to left bottom, #A9A9A9, #2F4F4F);
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 2px black;
+  z-index: 1;
+  border-radius: 0;
+}
+
+.progressBar::-ms-thumb {
+  width: 10px;
+  height: 10px;
+  -ms-transform: rotate(-45deg);
+  background: linear-gradient(to left bottom, #A9A9A9, #2F4F4F);
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 2px black;
+  z-index: 1;
+  border-radius: 0;
 }

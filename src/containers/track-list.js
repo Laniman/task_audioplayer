@@ -7,16 +7,21 @@ class TrackList extends Component {
 	showList() {
 		return this.props.tracks.map ((item) => {
 			return (
-				<li onClick={() => this.props.play(item)} key={item.id}>{item.artist} - {item.name}</li>
-				);
+					<li key={item.id} onClick={() => this.props.play(item)}>
+					<div className="track-info">{item.artist} - {item.name}</div><div className="duration">1:00</div>
+					</li>
+			);
 		});
 	}
 
 	render() {
 		return (
-			<ol>
-				{this.showList ()}
-			</ol>
+			<div className="tracklist">
+				<input className="searchField" type="text" placeholder="Search for artists or tracks" />
+				<ol>
+					{this.showList ()}
+				</ol>
+			</div>
 		);
 	}
 }

@@ -3,11 +3,16 @@ import {connect} from 'react-redux';
 
 class Display extends Component {
 	render() {
-		if (!this.props.track) {
-			return (<p>Nothing playing</p>)
-		}
+		
 		return (
-			<audio src={this.props.track.source} controls></audio>
+			//<audio src={this.props.track.source} controls autoplay="autoplay"></audio>
+			<div className="display">
+				<div className="previous"></div>
+				<div className="play"></div>
+				<div className="next"></div>
+				<input type="range" min="1" max="100" defaultValue="90" className="volumeBar" id="volumeBar"/>
+				<input type="range" min="1" max="100" defaultValue="0" className="progressBar" id="progressBar"/>
+			</div>
 		);
 	}
 }
