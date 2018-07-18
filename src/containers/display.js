@@ -11,11 +11,13 @@ class Display extends Component {
 						let playButton = document.getElementsByClassName('play');
 						playButton[0].classList.add('pause');
 						playButton[0].classList.remove('play');
+						
 					}
 					else {
 						let playButton = document.getElementsByClassName('pause');
 						playButton[0].classList.add('play');
 						playButton[0].classList.remove('pause');
+						
 					}
 				}}></div>
 				<div className="next"></div>

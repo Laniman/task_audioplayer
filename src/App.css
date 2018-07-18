@@ -83,24 +83,10 @@
   position: absolute;
   top: 10px;
   left: 20px;
-}
-
-.previous::before {
-  content: ''; 
-  position: absolute;
-  right: 12px; 
-  top: 4px;
-  border: 9px solid transparent;
-  border-right: 9px solid white; 
-}
-
-.previous::after {
-  content: ''; 
-  position: absolute;
-  right: 7px; 
-  top: 4px;
-  border: 9px solid transparent;
-  border-right: 9px solid white; 
+  background-image: url("./img/play_rotate.png"), url("./img/play_rotate.png");
+  background-size: 15px 20px, 15px 20px;
+  background-repeat: no-repeat, no-repeat;
+  background-position: 2px 4px, 9px 4px;
 }
 
 .play {
@@ -110,15 +96,10 @@
   position: absolute;
   top: 10px;
   left: 60px;
-}
-
-.play::before {
-  content: ''; 
-  position: absolute;
-  right: -1px; 
-  top: 4px;
-  border: 9px solid transparent;
-  border-left: 9px solid white; 
+  background-image: url("./img/play.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 3px 4px;
 }
 
 .pause {
@@ -128,26 +109,15 @@
   position: absolute;
   top: 10px;
   left: 60px;
+  background-image: url("./img/pause.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 2px 3px;
 }
 
-.pause::before {
-  content: ''; 
-  position: absolute;
-  right: 6px; 
-  top: 5px;
-  width: 5px;
-  height: 16px;
-  background-color: white;
-}
-
-.pause::after {
-  content: ''; 
-  position: absolute;
-  right: 15px; 
-  top: 5px;
-  width: 5px;
-  height: 16px;
-  background-color: white;
+.play:hover,
+.pause:hover {
+  box-shadow: 0px 0px 20px 2px black, inset 0px 0px 10px 2px grey;
 }
 
 .next {
@@ -157,24 +127,10 @@
   position: absolute;
   top: 10px;
   left: 100px;
-}
-
-.next::before {
-  content: ''; 
-  position: absolute;
-  right: 1px; 
-  top: 4px;
-  border: 9px solid transparent;
-  border-left: 9px solid white; 
-}
-
-.next::after {
-  content: ''; 
-  position: absolute;
-  right: -4px; 
-  top: 4px;
-  border: 9px solid transparent;
-  border-left: 9px solid white; 
+  background-image: url("./img/play.png"), url("./img/play.png");
+  background-size: 15px 20px, 15px 20px;
+  background-repeat: no-repeat, no-repeat;
+  background-position: 3px 4px, 10px 4px;
 }
 
 .previous:hover,
@@ -182,26 +138,7 @@
 .next:hover,
 .pause:hover {
   cursor: pointer;
-}
-
-.previous:hover:before,
-.previous:hover:after {
-  transition-duration: 0.2s;
-  border-right-color: #D3D3D3;
-}
-
-.play:hover:before,
-.play:hover:after,
-.next:hover:before,
-.next:hover:after {
-  transition-duration: 0.2s;
-  border-left-color: #D3D3D3;
-}
-
-.pause:hover:before,
-.pause:hover:after {
-  transition-duration: 0.2s;
-  background-color: #D3D3D3;
+  box-shadow: 0px 0px 20px 2px black, inset 0px 0px 10px 2px grey;
 }
 
 .volumeBar {
