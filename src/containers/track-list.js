@@ -7,7 +7,11 @@ class TrackList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			duration: []
+			duration: [],
+			playingTrackInfo: {
+				id: '-1',
+				mode: ''
+			}
 		}
 	}
 	setDuration(duration, ID) {
@@ -37,13 +41,35 @@ class TrackList extends Component {
 		return this.props.tracks.map ((item) => {
 			return (
 				<li key={item.id} id={item.id} onClick={() => {
-					this.props.play(item);
-					let cells = document.getElementsByClassName('trackListCell');
-					for (var i = 0; i < cells.length; i++) {
-						cells[i].classList.toggle('playingTrack', false);
+					if (this.state.playingTrackInfo.id !== item.id){
+						this.props.play(item);
+						this.setState({playingTrackInfo: {
+							id: item.id,
+							mode: 'playing'
+						}});
+						let cells = document.getElementsByClassName('trackListCell');
+						for (var i = 0; i < cells.length; i++) {
+							cells[i].classList.toggle('playingTrack', false);
+						}
+						let cellForPlayingTrack = document.getElementById(item.id);
+						cellForPlayingTrack.classList.add('playingTrack');
 					}
-					let cellForPlayingTrack = document.getElementById(item.id);
-					cellForPlayingTrack.classList.add('playingTrack');
+					else {
+						if (this.state.playingTrackInfo.mode === 'playing') {
+							document.getElementById('audioPlayer').pause();
+							this.setState({playingTrackInfo: {
+								id: item.id,
+								mode: 'pause'
+							}});
+						}
+						else {
+							document.getElementById('audioPlayer').play();
+							this.setState({playingTrackInfo: {
+								id: item.id,
+								mode: 'playing'
+							}});
+						}
+					}
 				}} className="trackListCell">
 					<audio id={"for_duration" + item.id} src={item.source} preload="metadata" onLoadedData={() => {
 						let thisAudio = document.getElementById('for_duration' + item.id);
