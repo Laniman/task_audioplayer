@@ -1,6 +1,6 @@
 export default function (state=null, action) {
 	switch (action.type) {
-		case 'TRACK_TO_PLAY':
+		case 'CURRENT_TIME':
 			return action.payload;
 		default:
 			return state;
