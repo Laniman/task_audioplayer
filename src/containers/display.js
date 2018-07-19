@@ -14,6 +14,8 @@ class Display extends Component {
 					<div className="next"></div>
 					<input type="range" min="1" max="100" defaultValue="90" className="volumeBar" id="volumeBar"/>
 					<input type="range" min="1" max="1000" defaultValue="0" className="progressBar" id="progressBar"/>
+					<span className="volume-decrease">-</span>
+					<span className="volume-increase">+</span>
 					<div className="elapsedTime">0:00</div>
 				</div>
 			);
@@ -65,6 +67,8 @@ class Display extends Component {
 						thisAudio.currentTime = newCurrentTime;
 						this.props.sendCurrentTime(thisAudio);
 					}}/>
+					<span className="volume-decrease">-</span>
+					<span className="volume-increase">+</span>
 					<div className="elapsedTime">{this.props.currentTime}</div>
 				</div>
 			);

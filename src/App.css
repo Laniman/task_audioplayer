@@ -196,6 +196,31 @@
   z-index: 1;
 }
 
+.volume-decrease {
+  width: 16px;
+  height: 16px;
+  color: rgb(55, 55, 55);
+  position: absolute;
+  top: 1px;
+  right: 175px;
+  font-size: 26px;
+}
+
+.volume-increase {
+  width: 16px;
+  height: 16px;
+  color: rgb(55, 55, 55);
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  font-size: 22px;
+}
+
+.volume-increase:hover,
+.volume-decrease:hover {
+  cursor: default;
+}
+
 .progressBar {
   -webkit-appearance: none;
   outline: none;
