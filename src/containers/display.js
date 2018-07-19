@@ -13,7 +13,7 @@ class Display extends Component {
 					<div className="play"></div>
 					<div className="next"></div>
 					<input type="range" min="1" max="100" defaultValue="90" className="volumeBar" id="volumeBar"/>
-					<input type="range" min="1" max="100" defaultValue="0" className="progressBar" id="progressBar"/>
+					<input type="range" min="1" max="1000" defaultValue="0" className="progressBar" id="progressBar"/>
 					<div className="elapsedTime">0:00</div>
 				</div>
 			);
@@ -25,7 +25,7 @@ class Display extends Component {
 						var thisAudio = document.getElementById('audioPlayer');
 						this.props.sendCurrentTime(thisAudio);
 						var pBar = document.getElementById('progressBar');
-						pBar.value = Math.floor(thisAudio.currentTime / thisAudio.duration * 100);
+						pBar.value = Math.floor(thisAudio.currentTime / thisAudio.duration * 1000);
 					}} autoPlay="autoplay" onPlaying={() => {
 						let playButton = document.getElementsByClassName('play');
 						if (playButton[0]) {
@@ -58,7 +58,13 @@ class Display extends Component {
 					}}></div>
 					<div className="next"></div>
 					<input type="range" min="1" max="100" defaultValue="90" className="volumeBar" id="volumeBar"/>
-					<input type="range" min="1" max="100" defaultValue="0" className="progressBar" id="progressBar"/>
+					<input type="range" min="1" max="1000" defaultValue="0" className="progressBar" id="progressBar" onChange={() => {
+						let thisAudio = document.getElementById('audioPlayer');
+						let newCurrentTime = document.getElementById('progressBar').value * thisAudio.duration / 1000;
+						var pBar = document.getElementById('progressBar');
+						thisAudio.currentTime = newCurrentTime;
+						this.props.sendCurrentTime(thisAudio);
+					}}/>
 					<div className="elapsedTime">{this.props.currentTime}</div>
 				</div>
 			);
