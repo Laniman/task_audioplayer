@@ -60,6 +60,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .tracklist .trackListCell .duration {
@@ -103,7 +106,7 @@
   background-image: url("./img/play.png");
   background-size: 16px 16px;
   background-repeat: no-repeat;
-  background-position: 5px 5px;
+  background-position: 6px 5px;
 }
 
 .pause {
@@ -114,9 +117,9 @@
   top: 10px;
   left: 60px;
   background-image: url("./img/pause.png");
-  background-size: 16px 16px;
+  background-size: 14px 14px;
   background-repeat: no-repeat;
-  background-position: 4px 5px;
+  background-position: 6px 6px;
 }
 
 .next {
@@ -129,7 +132,14 @@
   background-image: url("./img/play.png"), url("./img/play.png");
   background-size: 11px 16px, 11px 16px;
   background-repeat: no-repeat, no-repeat;
-  background-position: 4px 5px, 11px 5px;
+  background-position: 5px 5px, 12px 5px;
+}
+
+.previous,
+.play,
+.next,
+.pause {
+  border-radius: 50%;
 }
 
 .previous:hover,
@@ -168,6 +178,7 @@
   right: 20px;
   width: 150px;
   height: 7px;
+  padding: 0;
 }
 
 .volumeBar:hover {
@@ -232,6 +243,7 @@
   left: 5px;
   width: 360px;
   height: 15px;
+  padding: 0px;
 }
 
 .progressBar:hover {

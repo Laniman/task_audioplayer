@@ -87,7 +87,7 @@ class TrackList extends Component {
 			}});
 			let cells = document.getElementsByClassName('trackListCell');
 			for (let i = 0; i < cells.length; i++) {
-				cells[i].classList.toggle('playingTrack', false);
+				cells[i].classList.remove('playingTrack');
 			}
 			let cellForPlayingTrack = document.getElementById(anotherTrack.id);
 			cellForPlayingTrack.classList.add('playingTrack');
@@ -103,7 +103,7 @@ class TrackList extends Component {
 						}});
 						let cells = document.getElementsByClassName('trackListCell');
 						for (var i = 0; i < cells.length; i++) {
-							cells[i].classList.toggle('playingTrack', false);
+							cells[i].classList.remove('playingTrack');
 						}
 						let cellForPlayingTrack = document.getElementById(item.id);
 						cellForPlayingTrack.classList.add('playingTrack');
@@ -127,7 +127,7 @@ class TrackList extends Component {
 				}} className="trackListCell">
 					<audio id={"for_duration" + item.id} src={item.source} preload="metadata" onLoadedData={() => {
 						let thisAudio = document.getElementById('for_duration' + item.id);
-						thisAudio.remove();
+						thisAudio.parentElement.removeChild(thisAudio);
 						this.setDuration(thisAudio.duration, item.id);
 					}}/>
 					<div className="track-info"><span>{item.artist} - {item.name}</span></div><div id={"dur" + item.id} className="duration">{this.getDuration()}</div>
