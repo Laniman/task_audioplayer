@@ -8,27 +8,27 @@ export default function () {
 		},
 		{
 			id: 2,
-			artist: "alienzzz",
-			name: "maniac in the desert",
-			source: "http://sampleswap.org/mp3/artist/30220/alienzzz_maniac-in-the-desert-160.mp3"
+			artist: "BeatNabob",
+			name: "Maghousia",
+			source: "http://sampleswap.org/mp3/artist/29716/BeatNabob_02-Maghousia-160.mp3"
 		},
 		{
 			id: 3,
-			artist: "steve",
-			name: "raw",
-			source: "http://sampleswap.org/mp3/artist/2590/steve_raw2-160.mp3"
+			artist: "Jacqueslmond",
+			name: "DISCO remix",
+			source: "http://sampleswap.org/mp3/artist/27910/JacquesLMond_DISCO-remix-160.mp3"
 		},
 		{
 			id: 4,
-			artist: "xciter",
-			name: "Escape",
-			source: "http://sampleswap.org/mp3/artist/31511/soLid-Xciter_Escape-160.mp3"
+			artist: "JikJax",
+			name: "Yellow Lips",
+			source: "http://sampleswap.org/mp3/artist/28459/jikjax_YELLOW-LIPS-160.mp3"
 		},
 		{
 			id: 5,
-			artist: "jimdubtrix",
-			name: "Flying Higher(Shankar Mix)",
-			source: "http://sampleswap.org/mp3/artist/29716/BeatNabob_Flying-HigherShankar-Mix-160.mp3"
+			artist: "DAB",
+			name: "H5N1",
+			source: "http://sampleswap.org/mp3/artist/24308/DAB_H5N1-160.mp3"
 		}
 	]
 }
