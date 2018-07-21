@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {currentTime} from '../actions/index';
+import {currentTime, playAnotherTrack} from '../actions/index';
 
 class Display extends Component {
 	render() {
@@ -12,7 +12,7 @@ class Display extends Component {
 					<div className="previous"></div>
 					<div className="play"></div>
 					<div className="next"></div>
-					<input type="range" min="1" max="100" defaultValue="90" className="volumeBar" id="volumeBar"/>
+					<input type="range" min="1" max="100" defaultValue="100" className="volumeBar" id="volumeBar"/>
 					<input type="range" min="1" max="1000" defaultValue="0" className="progressBar" id="progressBar"/>
 					<span className="volume-decrease">-</span>
 					<span className="volume-increase">+</span>
@@ -40,8 +40,10 @@ class Display extends Component {
 							playButton[0].classList.add('play');
 							playButton[0].classList.remove('pause');
 						}
-					}}/>
-					<div className="previous"></div>
+					}} onEnded={() => this.props.playAnotherTrack('next')}/>
+					<div className="previous" onClick={() => {
+						this.props.playAnotherTrack('previous');
+					}}></div>
 					<div className="pause" onClick={() => {
 						if (document.getElementsByClassName('pause').length > 0) {
 							let playButton = document.getElementsByClassName('pause');
@@ -58,12 +60,17 @@ class Display extends Component {
 							audioTrack.play();
 						}
 					}}></div>
-					<div className="next"></div>
-					<input type="range" min="1" max="100" defaultValue="90" className="volumeBar" id="volumeBar"/>
+					<div className="next" onClick={() => {
+						this.props.playAnotherTrack('next');
+					}}></div>
+					<input type="range" min="1" max="100" defaultValue="100" className="volumeBar" id="volumeBar" onChange={() => {
+						let vBar = document.getElementById('volumeBar');
+						let thisAudio = document.getElementById('audioPlayer');
+						thisAudio.volume = vBar.value / 100;
+					}}/>
 					<input type="range" min="1" max="1000" defaultValue="0" className="progressBar" id="progressBar" onChange={() => {
 						let thisAudio = document.getElementById('audioPlayer');
 						let newCurrentTime = document.getElementById('progressBar').value * thisAudio.duration / 1000;
-						var pBar = document.getElementById('progressBar');
 						thisAudio.currentTime = newCurrentTime;
 						this.props.sendCurrentTime(thisAudio);
 					}}/>
@@ -84,7 +91,10 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-	return bindActionCreators({sendCurrentTime: currentTime}, dispatch)
+	return bindActionCreators({
+		sendCurrentTime: currentTime,
+		playAnotherTrack: playAnotherTrack
+	}, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Display);

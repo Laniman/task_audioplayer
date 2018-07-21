@@ -18,3 +18,14 @@ export const currentTime = (track) => {
 		payload: resultTime
 	}
 };
+
+export const playAnotherTrack = (definition) => {
+	if (definition != null) {
+		definition = definition.toUpperCase();
+	}
+	return {
+		type: "PLAY_ANOTHER_TRACK",
+		payload: definition
+
+	}
+};

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {play} from '../actions/index';
+import {play, playAnotherTrack} from '../actions/index';
 
 class TrackList extends Component {
 	constructor(props) {
@@ -37,7 +37,61 @@ class TrackList extends Component {
 		}
 	}
 
+	filterList() {
+		let searchInput = document.getElementById('searchTracks');
+		if (searchInput != null) {
+			let filter = searchInput.value.toUpperCase();
+			if (searchInput.value.length > 2) {
+				let cells = document.getElementsByClassName('trackListCell');
+				for (var i = 0; i < cells.length; i++) {
+					let someSpan = cells[i].getElementsByTagName("span")[0];
+			        if (someSpan.innerHTML.toUpperCase().indexOf(filter) > -1) {
+			            cells[i].style.display = "";
+			        } else {
+			            cells[i].style.display = "none";
+			        }
+				}
+			} else {
+				let cells = document.getElementsByClassName('trackListCell');
+				for (let i = 0; i < cells.length; i++) {
+					cells[i].style.display = "";
+				}
+			}
+		}
+	}
+
 	showList() {
+		if (this.props.playAnotherTrack != null) {
+			var anotherTrack;
+			if ((this.props.playAnotherTrack === 'NEXT') && (this.state.playingTrackInfo.id === this.props.tracks[this.props.tracks.length - 1].id)) {
+				anotherTrack = this.props.tracks[0];
+			}
+			else if ((this.props.playAnotherTrack === 'PREVIOUS') && (this.state.playingTrackInfo.id === this.props.tracks[0].id)) {
+				anotherTrack = this.props.tracks[this.props.tracks.length - 1];
+			} else {
+				for (var i = 0; i < this.props.tracks.length; i++) {
+					if (this.props.tracks[i].id === this.state.playingTrackInfo.id) {
+						if (this.props.playAnotherTrack === 'NEXT') {
+							anotherTrack = this.props.tracks[i + 1];
+						} else {
+							anotherTrack = this.props.tracks[i - 1];
+						}
+					}
+				}
+			}
+			this.props.anotherTrackToNull(null);
+			this.props.play(anotherTrack);
+			this.setState({playingTrackInfo: {
+				id: anotherTrack.id,
+				mode: 'playing'
+			}});
+			let cells = document.getElementsByClassName('trackListCell');
+			for (let i = 0; i < cells.length; i++) {
+				cells[i].classList.toggle('playingTrack', false);
+			}
+			let cellForPlayingTrack = document.getElementById(anotherTrack.id);
+			cellForPlayingTrack.classList.add('playingTrack');
+		}
 		return this.props.tracks.map ((item) => {
 			return (
 				<li key={item.id} id={item.id} onClick={() => {
@@ -76,7 +130,7 @@ class TrackList extends Component {
 						thisAudio.remove();
 						this.setDuration(thisAudio.duration, item.id);
 					}}/>
-					<div className="track-info">{item.artist} - {item.name}</div><div id={"dur" + item.id} className="duration">{this.getDuration()}</div>
+					<div className="track-info"><span>{item.artist} - {item.name}</span></div><div id={"dur" + item.id} className="duration">{this.getDuration()}</div>
 				</li>
 			);
 		});
@@ -85,8 +139,8 @@ class TrackList extends Component {
 	render() {
 		return (
 			<div className="tracklist">
-				<input className="searchField" type="text" placeholder="Search for artists or tracks" />
-				<ol>
+				<input className="searchField" type="search" placeholder="Search for artists or tracks" id="searchTracks" onKeyUp={() => this.filterList()}/>
+				<ol id="listOfTracks">
 					{this.showList ()}
 				</ol>
 			</div>
@@ -96,13 +150,15 @@ class TrackList extends Component {
 
 function mapStateToProps(state) {
 	return {
-		tracks: state.tracks
+		tracks: state.tracks,
+		playAnotherTrack: state.playAnotherTrack
 	};
 }
 
 function matchDispatchToProps(dispatch) {
 	return bindActionCreators({
-		play: play
+		play: play,
+		anotherTrackToNull: playAnotherTrack
 	}, dispatch)
 }
 
