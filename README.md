@@ -1,7 +1,7 @@
 ﻿# task_audioplayer
 Task 2  - react/redux audioplayer
 
-Информация по треками расположена в src/reducers/audiotrack.js
+Информация по трекам расположена в src/reducers/audiotrack.js
 
 Для запуска через npm необходимо выполнить:
 
