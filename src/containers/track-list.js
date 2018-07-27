@@ -60,6 +60,44 @@ class TrackList extends Component {
 		}
 	}
 
+	listItemClickHandle(item) {
+		if (this.state.playingTrackInfo.id !== item.id){
+			this.props.play(item);
+			this.setState({playingTrackInfo: {
+				id: item.id,
+				mode: 'playing'
+			}});
+			let cells = document.getElementsByClassName('trackListCell');
+			for (var i = 0; i < cells.length; i++) {
+				cells[i].classList.remove('playingTrack');
+			}
+			let cellForPlayingTrack = document.getElementById(item.id);
+			cellForPlayingTrack.classList.add('playingTrack');
+		}
+		else {
+			if (this.state.playingTrackInfo.mode === 'playing') {
+				document.getElementById('audioPlayer').pause();
+				this.setState({playingTrackInfo: {
+					id: item.id,
+					mode: 'pause'
+				}});
+			}
+			else {
+				document.getElementById('audioPlayer').play();
+				this.setState({playingTrackInfo: {
+					id: item.id,
+					mode: 'playing'
+				}});
+			}
+		}
+	}
+
+	audioDataLoaded(item) {
+		let thisAudio = document.getElementById('for_duration' + item.id);
+		thisAudio.parentElement.removeChild(thisAudio);
+		this.setDuration(thisAudio.duration, item.id);
+	}
+
 	showList() {
 		if (this.props.playAnotherTrack != null) {
 			var anotherTrack;
@@ -94,43 +132,18 @@ class TrackList extends Component {
 		}
 		return this.props.tracks.map ((item) => {
 			return (
-				<li key={item.id} id={item.id} onClick={() => {
-					if (this.state.playingTrackInfo.id !== item.id){
-						this.props.play(item);
-						this.setState({playingTrackInfo: {
-							id: item.id,
-							mode: 'playing'
-						}});
-						let cells = document.getElementsByClassName('trackListCell');
-						for (var i = 0; i < cells.length; i++) {
-							cells[i].classList.remove('playingTrack');
-						}
-						let cellForPlayingTrack = document.getElementById(item.id);
-						cellForPlayingTrack.classList.add('playingTrack');
-					}
-					else {
-						if (this.state.playingTrackInfo.mode === 'playing') {
-							document.getElementById('audioPlayer').pause();
-							this.setState({playingTrackInfo: {
-								id: item.id,
-								mode: 'pause'
-							}});
-						}
-						else {
-							document.getElementById('audioPlayer').play();
-							this.setState({playingTrackInfo: {
-								id: item.id,
-								mode: 'playing'
-							}});
-						}
-					}
-				}} className="trackListCell">
-					<audio id={"for_duration" + item.id} src={item.source} preload="metadata" onLoadedData={() => {
-						let thisAudio = document.getElementById('for_duration' + item.id);
-						thisAudio.parentElement.removeChild(thisAudio);
-						this.setDuration(thisAudio.duration, item.id);
-					}}/>
-					<div className="track-info"><span>{item.artist} - {item.name}</span></div><div id={"dur" + item.id} className="duration">{this.getDuration()}</div>
+				<li key={item.id} 
+					id={item.id} 
+					onClick={() => this.listItemClickHandle(item)} 
+					className="trackListCell">
+					<audio id={"for_duration" + item.id} 
+						src={item.source} 
+						preload="metadata" 
+						onLoadedData={() => this.audioDataLoaded(item)}/>
+					<div className="track-info">
+						<span>{item.artist} - {item.name}</span>
+					</div>
+					<div id={"dur" + item.id} className="duration">{this.getDuration()}</div>
 				</li>
 			);
 		});
