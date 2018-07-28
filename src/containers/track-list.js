@@ -38,7 +38,7 @@ class TrackList extends Component {
 	}
 
 	filterList() {
-		let searchInput = document.getElementById('searchTracks');
+		let searchInput = this.refs.searchTracks;
 		if (searchInput != null) {
 			let filter = searchInput.value.toUpperCase();
 			if (searchInput.value.length > 2) {
@@ -143,7 +143,8 @@ class TrackList extends Component {
 					<div className="track-info">
 						<span>{item.artist} - {item.name}</span>
 					</div>
-					<div id={"dur" + item.id} className="duration">{this.getDuration()}</div>
+					<div id={"dur" + item.id} 
+						className="duration">{this.getDuration()}</div>
 				</li>
 			);
 		});
@@ -152,7 +153,12 @@ class TrackList extends Component {
 	render() {
 		return (
 			<div className="tracklist">
-				<input className="searchField" type="search" placeholder="Search for artists or tracks" id="searchTracks" onKeyUp={() => this.filterList()}/>
+				<input className="searchField" 
+					type="search" 
+					placeholder="Search for artists or tracks" 
+					id="searchTracks" 
+					ref="searchTracks"
+					onKeyUp={() => this.filterList()}/>
 				<ol id="listOfTracks">
 					{this.showList ()}
 				</ol>

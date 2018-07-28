@@ -5,9 +5,9 @@ import {currentTime, playAnotherTrack} from '../actions/index';
 
 class Display extends Component {
 	updateTime() {
-		var thisAudio = document.getElementById('audioPlayer');
+		var thisAudio = this.refs.audioPlayer;
 		this.props.sendCurrentTime(thisAudio);
-		var pBar = document.getElementById('progressBar');
+		var pBar = this.refs.progressBar;
 		pBar.value = Math.floor(thisAudio.currentTime / thisAudio.duration * 1000);
 	}
 
@@ -24,27 +24,27 @@ class Display extends Component {
 			let pauseButton = document.getElementsByClassName('pause');
 			pauseButton[0].classList.add('play');
 			pauseButton[0].classList.remove('pause');
-			let audioTrack = document.getElementById("audioPlayer");
+			let audioTrack = this.refs.audioPlayer;
 			audioTrack.pause();
 		}
 		else {
 			let playButton = document.getElementsByClassName('play');
 			playButton[0].classList.add('pause');
 			playButton[0].classList.remove('play');
-			let audioTrack = document.getElementById("audioPlayer");
+			let audioTrack = this.refs.audioPlayer;
 			audioTrack.play();
 		}
 	}
 
 	forChangeVolumeBar() {
-		let vBar = document.getElementById('volumeBar');
-		let thisAudio = document.getElementById('audioPlayer');
+		let vBar = this.refs.volumeBar;
+		let thisAudio = this.refs.audioPlayer;
 		thisAudio.volume = vBar.value / 100;
 	}
 
 	forChangeProgressBar() {
-		let thisAudio = document.getElementById('audioPlayer');
-		let newCurrentTime = document.getElementById('progressBar').value * thisAudio.duration / 1000;
+		let thisAudio = this.refs.audioPlayer;
+		let newCurrentTime = this.refs.progressBar.value * thisAudio.duration / 1000;
 		thisAudio.currentTime = newCurrentTime;
 		this.props.sendCurrentTime(thisAudio);
 	}
@@ -80,6 +80,7 @@ class Display extends Component {
 				<div className="display">
 					<audio id="audioPlayer" 
 						src={this.props.track.source} 
+						ref="audioPlayer"
 						onTimeUpdate={() => this.updateTime()} 
 						autoPlay="autoplay" 
 						onPlaying={() => this.swapClassesForPlayButton('play', 'pause')} 
@@ -97,6 +98,7 @@ class Display extends Component {
 						defaultValue="100" 
 						className="volumeBar" 
 						id="volumeBar" 
+						ref="volumeBar"
 						onChange={() => this.forChangeVolumeBar()}/>
 					<input type="range" 
 						min="1" 
@@ -104,6 +106,7 @@ class Display extends Component {
 						defaultValue="0" 
 						className="progressBar" 
 						id="progressBar" 
+						ref="progressBar"
 						onChange={() => this.forChangeProgressBar()}/>
 					<span className="volume-text">Volume:</span>
 					<div className="elapsedTime">{this.props.currentTime}</div>
